@@ -5,7 +5,6 @@ metadata:
   namespace: kube-system
 spec:
   chart: jenkins
-  version: 3.4.5
   repo: https://apphub.aliyuncs.com/
   targetNamespace: jenkins
   valuesContent: |-
@@ -14,3 +13,11 @@ spec:
       AdminPassword: {{ .adminPassword }}
     rbac:
       install: true
+    ingress:
+      enabled: "true"
+      annotations:
+        kubernetes.io/ingress.class: traefik
+        traefik.ingress.kubernetes.io/rule-type: PathPrefixStrip
+      hosts:
+        - table.cosin.site
+      path: /jenkins/
