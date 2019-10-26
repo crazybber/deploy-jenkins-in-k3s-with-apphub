@@ -1,0 +1,16 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: jenkins
+  namespace: kube-system
+spec:
+  chart: jenkins
+  version: 3.4.5
+  repo: https://apphub.aliyuncs.com/
+  targetNamespace: jenkins
+  valuesContent: |-
+    Master:
+      AdminUser: {{ .adminUser }}
+      AdminPassword: {{ .adminPassword }}
+    rbac:
+      install: true
